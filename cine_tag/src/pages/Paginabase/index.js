@@ -10,7 +10,7 @@ function PaginaBase() {
             <Cabecalho />
             <FavoritosProvider>
                 <Container>
-                    <Outlet />
+                    <Outlet /> 
                 </Container>
             </FavoritosProvider>
             <Rodape />

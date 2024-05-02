@@ -2,14 +2,19 @@ import Banner from "components/Banner";
 import styles from "./Player.module.css";
 import Titulo from "components/Titulo";
 import { useParams } from "react-router-dom";
-import videos from "json/db.json";
 import NaoEncontrada from "pages/NaoEncontrada";
+import { useEffect, useState } from "react";
 
 function Player() {
+    const [video, setVideo] = useState();
     const parametros = useParams(); //usa o parâmetro (ex.: 1) passado na URL -> http://localhost:3000/1 
-    const video = videos.find((video) => {
-            return video.id === Number(parametros.id);
-    })
+
+    useEffect(() => {
+        fetch(`https://my-json-server.typicode.com/moraisalysson/cinetag-api/videos?id=${parametros.id}`)
+        .then(result => result.json())
+        .then(dados => 
+            setVideo(...dados))
+    }, [])
 
     if(!video) {
         return <NaoEncontrada />
